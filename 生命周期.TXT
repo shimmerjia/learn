@@ -1,0 +1,110 @@
+生命周期详解：
+
+import React,{Component} from 'react';
+import { render } from 'react-dom';
+import Hello from './Hello';
+
+class Test extends Component {
+  componentWillMount() {
+    //this.setState({name : 'tan'})
+    console.log('componentWillMount')
+  }
+  componentDidMount() {
+    console.log('componentDidMount')
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps')
+  }
+  componentWillUpdate(nextProps, nextState) {
+    console.log('componentWillUpdate')
+  }
+  componentDidUpdate() {
+    console.log('componentDidUpdate')
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('shouldComponentUpdate')
+    if(nextProps.name === 'tan2') {
+      return false;
+    }
+    return true;
+  }
+  componentWillUnmount(){
+    console.log('componentWillUnmount')
+  }
+  render() {
+    console.log('goes render')
+    return (
+      <div> hello { this.props.name } </div>
+      )
+  }
+}
+
+class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      value: ""
+    }
+  }
+  
+  render(){
+    return(
+      <div>
+        <Hello name="CodeSandbox" />
+        <input value={this.state.value} onChange={(e) => this.setState({ value: e.target.value})} />
+        { this.state.value !== 'ta' ? <Test name={this.state.value} /> : this.state.value}
+      </div>
+    )
+  }
+
+}
+
+render(<App />, document.getElementById('root'));
+
+
+
+
+
+谷歌浏览器滚动条样式调整：
+
+::-webkit-scrollbar-thumb {
+  width: 5px;
+  background-color: @scrollbar-bg;
+  //border: 2px solid #999DA3;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 5px;
+  background-color: @scrollbar-thumb-bg;
+  border-radius: 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
