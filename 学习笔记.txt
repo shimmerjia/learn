@@ -1,0 +1,247 @@
+﻿����������⣺
+
+import React,{Component} from 'react';
+import { render } from 'react-dom';
+import Hello from './Hello';
+
+class Test extends Component {
+  componentWillMount() {
+    //this.setState({name : 'tan'})
+    console.log('componentWillMount')
+  }
+  componentDidMount() {
+    console.log('componentDidMount')
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps')
+  }
+  componentWillUpdate(nextProps, nextState) {
+    console.log('componentWillUpdate')
+  }
+  componentDidUpdate() {
+    console.log('componentDidUpdate')
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('shouldComponentUpdate')
+    if(nextProps.name === 'tan2') {
+      return false;
+    }
+    return true;
+  }
+  componentWillUnmount(){
+    console.log('componentWillUnmount')
+  }
+  render() {
+    console.log('goes render')
+    return (
+      <div> hello { this.props.name } </div>
+      )
+  }
+}
+
+class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      value: ""
+    }
+  }
+  
+  render(){
+    return(
+      <div>
+        <Hello name="CodeSandbox" />
+        <input value={this.state.value} onChange={(e) => this.setState({ value: e.target.value})} />
+        { this.state.value !== 'ta' ? <Test name={this.state.value} /> : this.state.value}
+      </div>
+    )
+  }
+
+}
+
+render(<App />, document.getElementById('root'));
+
+
+
+
+
+�ȸ��������������ʽ������
+
+::-webkit-scrollbar-thumb {
+  width: 5px;
+  background-color: @scrollbar-bg;
+  //border: 2px solid #999DA3;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 5px;
+  background-color: @scrollbar-thumb-bg;
+  border-radius: 2px;
+}
+//���鷽�� //this.props.form.validateFields
+handleSubmit = (e) => {
+        // e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                let path = values.attachements.fileList[0].response.path;
+                values.path = path;
+                delete values.attachements
+                this.props.onSubmit(values)
+            }
+        });
+    }
+
+// 题目： 实现 九九乘法(惩罚)表要求： 每一秒输出 从1至9 的相应乘法表达式格式如下：
+// 1 * 1 = 1;
+// 2 * 1 = 2;
+// 2 * 2 = 4;
+// 3 * 1 = 3;
+// 3 * 2 = 6;
+// ......
+// 9 * 9 = 81;
+let i = 9;
+let j = 1;
+let lastNumber = 9;
+let t = setInterval(step, 1000)
+function step() {
+    console.log(`${i} * ${j} = ${i*j}`)
+    j++;
+    if(i === lastNumber && j > lastNumber) {
+        clearInterval(t)
+    }
+    if(j > i) {
+        i++;
+        j = 1;
+    }
+}
+
+
+//约瑟夫函数
+let interval = 3;
+let count = 1;
+let initialArr = [1, 2, 3, 4, 5];
+let jesuph = (arr) => {
+    let nextArr = [];
+    if(arr.length <= 1) { return arr[0] }
+    if(arr.length > 1 && arr.length < interval) {
+        Object.assign(nextArr, arr)
+    	let shouldBeRemoveIdx = interval - nextArr.length - 1;
+        arr.splice(shouldBeRemoveIdx, 1)
+        return jesuph(arr);
+    }
+    for(let i = 0; i < arr.length; i++) {
+        if(count++ % interval !== 0) {
+           nextArr.push(arr[i])
+        }
+    }
+    return jesuph(nextArr);
+}
+
+let lastPerson = jesuph(initialArr)
+console.log(lastPerson)
+
+
+
+
+
+
+
+
+
+//输入日期求是一年中的第几天
+const getMonth = [31,30,31,30,31,30,31,30,30,31,30,31];
+let sum = 0;
+let num =(data)	=> {
+    let m = data.split('.')[0];
+    let d = data.split('.')[1];
+     
+    if(+m === 1){
+    	sum+= +d;
+    }else if(+m>1 && +m<13){
+      for(i=0; i<+m-1; i++){
+          sum += getMonth[i];
+      }
+      sum+= +d;
+    }
+    console.log(sum);
+}
+let testDay = num('2.13')
+
+
+//改良版
+const getMonth = [31, 30, 31, 30, 31, 30, 31, 30, 30, 31, 30, 31];
+let num = (data) => {
+    let m = data.split('.')[0];
+    let d = data.split('.')[1];
+    let totalMonth = getMonth.slice(0, m - 1);
+    let sum = totalMonth.reduce((sum = 0, m) => sum + m)
+    sum += +d;
+    return sum;
+}
+let testDay = num('2.13')
+console.log(testDay)
+
+
+//打印菱形
+function Printfile(num) {        
+        for (var i = 1; i <= num*2-1; i++){
+           let line = num*2-1-Math.abs(i-num)*2
+           document.write('*'.repeat(line));
+           document.write("</br>");
+        }
+    }
+Printfile(3)
+
+
+
+
+//题目： 将一个数组的数据对称调换
+let arr = [1,2,3,4,5];
+function change(arr){ 
+  	for(i=0; i<Math.floor(arr.length/2); i++){     
+         let temp = arr[i];
+         arr[i] = arr[arr.length-1 - i];
+         arr[arr.length-1 - i] = temp;       
+     } 
+     console.log(arr)
+}   
+change(arr)
+
+
+//归并
+let a = [1, 3];
+let b = [2, 4, 6, 8];
+let needSortArr = [4, 2, 7, 1, 5, 3];
+
+let merge = (left, right) => {
+   let res = [];
+   while(left.length > 0 && right.length > 0) {
+      if(left[0] < right[0]) {
+         res.push(left[0]);
+         left.shift();
+      }else {
+        res.push(right[0]);
+         right.shift();
+      }
+   }
+   return res.concat(left).concat(right);
+}
+
+let seperateArr = (arr) => {
+   if(arr.length === 1) { 
+      return arr;
+   }
+   let beforeArr = arr.splice(0, arr.length /2 );
+   let afterChildArr = seperateArr(arr);
+   let beforeChildArr = seperateArr(beforeArr);
+   return merge(beforeChildArr, afterChildArr);
+}
+let result = seperateArr(needSortArr);
+console.log(result)
+
+
+
+
