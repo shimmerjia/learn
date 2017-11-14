@@ -8,6 +8,12 @@ Xcode是运行在操作系统Mac OS X上的集成开发工具（IDE）,
 
 集成在xcode 里的一些开发工具的支持, 来帮助我们编译代码(eg: node.js, homebrew)
 
+装好之后在安装xcode 命令行开发者工具
+
+        cd /Applications/Utilities
+
+        xcode-select --install
+
 
 ### [Homebrew](https://brew.sh/)
 
